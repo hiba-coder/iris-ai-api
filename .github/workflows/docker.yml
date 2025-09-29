@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      
+      - name: Debug username
+        run: echo "Docker username is ${{ secrets.DOCKER_USERNAME }}"
 
       - name: Login to DockerHub
         uses: docker/login-action@v2
