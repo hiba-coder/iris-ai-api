@@ -5,9 +5,21 @@ on:
     branches: [ "main" ]   # runs only when you push to main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build test image
+        run: docker build --target test -t devops-app-test .
+
+      - name: Run tests
+        run: docker run devops-app-test
+
   build:
     runs-on: ubuntu-latest
-
+    needs: test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
